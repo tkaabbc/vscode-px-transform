@@ -1,0 +1,83 @@
+{
+  "name": "px-transform",
+  "displayName": "px-transform",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "Tingkeng",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "categories": [
+    "Formatters",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "px",
+    "transform",
+    "calculate",
+    "rpx",
+    "px to rpx",
+    "px to vw"
+  ],
+  "activationEvents": [
+    "onCommand:px-transform.multiply"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "px-transform",
+      "properties": {
+        "transform.multiplier": {
+          "type": "number",
+          "default": 2,
+          "description": "乘以几"
+        },
+        "transform.targetUnit": {
+          "type": "string",
+          "default": "px",
+          "description": "运算后的单位"
+        },
+        "transform.sourceUnit": {
+          "type": "string",
+          "default": "px",
+          "description": "运算前的单位"
+        },
+        "transform.unitPrecision": {
+          "type": "integer",
+          "default": 3,
+          "description": "unitPrecision(几位小数)"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "px-transform.multiply",
+        "title": "进行乘法运算"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "px-transform.multiply",
+        "key": "Alt+z"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.51.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.9.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "typescript": "^4.0.2",
+    "vscode-test": "^1.4.0"
+  },
+  "repository": "https://github.com/tkaabbc/vscode-px-transform"
+}
