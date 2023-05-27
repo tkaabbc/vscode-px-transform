@@ -9,6 +9,12 @@ This is an extension for Visual Studio Code that allows you to convert **any** c
 - any......
 
 ## Usage
+### For example: 
+px -> rem:
+![](https://github.com/tkaabbc/vscode-px-transform/blob/master/source/px-to-rem-demo.gif)
+
+2px -> 4px:
+![](https://github.com/tkaabbc/vscode-px-transform/blob/master/source/px-to-px-demo.gif)
 
 The use of this extension is very simple:  
 
@@ -19,6 +25,8 @@ The use of this extension is very simple:
 3. Select the parts that need to be converted.
 
 4. Press "Alt + Z" (Mac press "option + Z").
+
+## 
 ---
 
 
