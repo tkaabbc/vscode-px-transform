@@ -18,6 +18,18 @@
     "calculate",
     "rpx",
     "px to rpx",
+    "rem",
+    "px rem",
+    "px to rem",
+    "px2rem",
+    "rem to px",
+    "css rem",
+    "wxss",
+    "rpx to px",
+    "vw",
+    "vh",
+    "css",
+    "vw to px",
     "px to vw"
   ],
   "activationEvents": [
