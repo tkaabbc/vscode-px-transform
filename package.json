@@ -31,22 +31,22 @@
         "transform.multiplier": {
           "type": "number",
           "default": 2,
-          "description": "乘以几"
+          "description": "Multiplier. 乘以几"
         },
         "transform.targetUnit": {
           "type": "string",
           "default": "px",
-          "description": "运算后的单位"
+          "description": "The transformed unit. 转换后的单位"
         },
         "transform.sourceUnit": {
           "type": "string",
           "default": "px",
-          "description": "运算前的单位"
+          "description": "The unit before the transformation. 转换前的单位"
         },
         "transform.unitPrecision": {
           "type": "integer",
           "default": 3,
-          "description": "unitPrecision(几位小数)"
+          "description": "Maximum number of decimals digits after transformed. 运算结果保留几位小数"
         }
       }
     },
