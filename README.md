@@ -6,7 +6,7 @@ This is an extension for Visual Studio Code that allows you to convert **any** c
 - px -> vw
 - rem -> px
 - 2px -> 4px
-- any......
+- any.....
 
 ## Usage
 ### For example: 
