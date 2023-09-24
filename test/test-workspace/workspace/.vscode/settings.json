@@ -1,0 +1,6 @@
+{
+    "transform.multiplier": 10,
+    "transform.sourceUnit": "px",
+    "transform.targetUnit": "rem",
+    "transform.unitPrecision": 2
+}
