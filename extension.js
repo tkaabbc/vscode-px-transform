@@ -4,32 +4,27 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
-  disposable = vscode.commands.registerTextEditorCommand('px-transform.multiply', function (textEditor, textEditorEdit) {
+  const disposable = vscode.commands.registerTextEditorCommand('px-transform.multiply', function (textEditor, textEditorEdit) {
     const config = vscode.workspace.getConfiguration("transform");
     const multiplier = config.get('multiplier');
     const targetUnit = config.get('targetUnit');
     const sourceUnit = config.get('sourceUnit');
-    var regexStr = `([0-9]*\\.?[0-9]+)${sourceUnit}`;
-    placeholder(regexStr, (match, value) => `${pxTransform(value, multiplier)}${targetUnit}`, textEditor, textEditorEdit);
+    const unitPrecision = config.get('unitPrecision');
+    const regexStr = `([0-9]*\\.?[0-9]+)${sourceUnit}`;
+    placeholder(regexStr, (match, value) => `${pxTransform(value, multiplier, unitPrecision)}${targetUnit}`, textEditor, textEditorEdit);
   });
   context.subscriptions.push(disposable);
 }
 
-function pxTransform(px, multiplier) {
+function pxTransform(px, multiplier, unitPrecision) {
   if (multiplier == 0) { return 0; }
-  const config = vscode.workspace.getConfiguration("transform");
-  var unitPrecision = config.get('unitPrecision');
-  const value = parseFloat((px * multiplier).toFixed(unitPrecision));
-  return value;
+  return parseFloat((px * multiplier).toFixed(unitPrecision));
 }
 
 function placeholder(regexString, replaceFunction, textEditor, textEditorEdit) {
-  let regexExp = new RegExp(regexString, "i");
-  let regexExpG = new RegExp(regexString, "ig");
+  const regexExpG = new RegExp(regexString, "ig");
   const selections = textEditor.selections;
   if (selections.length == 0 || selections.reduce((acc, val) => acc || val.isEmpty), false) { return; }
-  const config = vscode.workspace.getConfiguration("px-to-vw");
   const changesMade = new Map();
   textEditor.edit(builder => {
     let numOcurrences = 0;
@@ -96,7 +91,7 @@ function findValueRangeToConvert(selection, regexString, textEditor) {
   const text = textEditor.document.lineAt(line).text;
   const regexExpG = new RegExp(regexString, "ig");
 
-  var result, indices = [];
+  let result;
   while ((result = regexExpG.exec(text))) {
     const resultStart = result.index;
     const resultEnd = result.index + result[0].length;
