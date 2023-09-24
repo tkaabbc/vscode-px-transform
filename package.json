@@ -66,13 +66,21 @@
     "commands": [
       {
         "command": "px-transform.multiply",
-        "title": "进行乘法运算"
+        "title": "Perform a transform 进行转换"
+      },
+      {
+        "command": "px-transform.divide",
+        "title": "Perform a inverse transform 进行逆转换"
       }
     ],
     "keybindings": [
       {
         "command": "px-transform.multiply",
         "key": "Alt+z"
+      },
+      {
+        "command": "px-transform.divide",
+        "key": "Shift+Alt+z"
       }
     ]
   },
