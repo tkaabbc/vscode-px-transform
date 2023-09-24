@@ -2,7 +2,7 @@
   "name": "px-transform",
   "displayName": "px-transform",
   "description": "convert one css unit to another, like px rem vw and so on",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "publisher": "Tingkeng",
   "engines": {
     "vscode": "^1.51.0"
@@ -14,23 +14,36 @@
   ],
   "keywords": [
     "px",
-    "transform",
-    "calculate",
     "rpx",
-    "px to rpx",
     "rem",
+    "convert",
+    "vw to vmin",
+    "css unit",
+    "px to rpx",
     "px rem",
     "px to rem",
     "px2rem",
     "rem to px",
     "css rem",
-    "wxss",
+    "vmin",
+    "vmax",
     "rpx to px",
     "vw",
     "vh",
     "css",
     "vw to px",
-    "px to vw"
+    "px to vw",
+    "transform",
+    "calculate",
+    "em",
+    "cm",
+    "mm",
+    "in",
+    "pt",
+    "pc",
+    "ch",
+    "ex",
+    "wxss"
   ],
   "activationEvents": [
     "onCommand:px-transform.multiply"
@@ -66,13 +79,21 @@
     "commands": [
       {
         "command": "px-transform.multiply",
-        "title": "进行乘法运算"
+        "title": "Perform a transform 进行转换"
+      },
+      {
+        "command": "px-transform.divide",
+        "title": "Perform a inverse transform 进行逆转换"
       }
     ],
     "keybindings": [
       {
         "command": "px-transform.multiply",
         "key": "Alt+z"
+      },
+      {
+        "command": "px-transform.divide",
+        "key": "Shift+Alt+z"
       }
     ]
   },

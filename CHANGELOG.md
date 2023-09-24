@@ -6,4 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-- Initial release
+## [1.0.6] - 2023-09-24
+
+### Added
+
+- Support inverse transform.
+- Add test code for command px-transform.multiply.

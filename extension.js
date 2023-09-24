@@ -1,40 +1,67 @@
 const vscode = require('vscode');
+const { COMMAND_KEYS, CONFIGURATION_PREFIX, NUM_REGEXP, MESSAGES } = require('./constant');
+
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
-  disposable = vscode.commands.registerTextEditorCommand('px-transform.multiply', function (textEditor, textEditorEdit) {
-    const config = vscode.workspace.getConfiguration("transform");
-    const multiplier = config.get('multiplier');
-    const targetUnit = config.get('targetUnit');
-    const sourceUnit = config.get('sourceUnit');
-    var regexStr = `([0-9]*\\.?[0-9]+)${sourceUnit}`;
-    placeholder(regexStr, (match, value) => `${pxTransform(value, multiplier)}${targetUnit}`, textEditor, textEditorEdit);
+  const disposableForTransform = vscode.commands.registerTextEditorCommand(COMMAND_KEYS.TRANSFORM, function (textEditor, textEditorEdit) {
+    const {
+      multiplier,
+      targetUnit,
+      sourceUnit,
+      unitPrecision,
+    } = getTransformConfiguration();
+    const regexStr = `${NUM_REGEXP}${sourceUnit}`;
+    placeholder(regexStr, (match, value) => `${pxTransform(value, multiplier, unitPrecision)}${targetUnit}`, textEditor, textEditorEdit);
   });
-  context.subscriptions.push(disposable);
+  const disposableForInverseTransform = vscode.commands.registerTextEditorCommand(COMMAND_KEYS.INVERSE_TRANSFORM, function (textEditor, textEditorEdit) {
+    const {
+      multiplier,
+      targetUnit,
+      sourceUnit,
+      unitPrecision,
+    } = getTransformConfiguration();
+    const regexStr = `${NUM_REGEXP}${targetUnit}`;
+    placeholder(regexStr, (match, value) => `${pxInverseTransform(value, multiplier, unitPrecision)}${sourceUnit}`, textEditor, textEditorEdit);
+  });
+
+  context.subscriptions.push(disposableForTransform);
+  context.subscriptions.push(disposableForInverseTransform);
 }
 
-function pxTransform(px, multiplier) {
+function pxTransform(value, multiplier, unitPrecision) {
   if (multiplier == 0) { return 0; }
-  const config = vscode.workspace.getConfiguration("transform");
-  var unitPrecision = config.get('unitPrecision');
-  const value = parseFloat((px * multiplier).toFixed(unitPrecision));
-  return value;
+  return parseFloat((value * multiplier).toFixed(unitPrecision));
+}
+
+const pxInverseTransform = (value, multiplier, unitPrecision) => {
+  if (multiplier == 0) {
+    return vscode.window.showErrorMessage(MESSAGES.INVERSE_TRANSFORM_FAIL);
+  }
+  return parseFloat((value / multiplier).toFixed(unitPrecision));
+}
+
+const getTransformConfiguration = () => {
+  const config = vscode.workspace.getConfiguration(CONFIGURATION_PREFIX);
+  return {
+    multiplier: config.get('multiplier'),
+    targetUnit: config.get('targetUnit'),
+    sourceUnit: config.get('sourceUnit'),
+    unitPrecision: config.get('unitPrecision'),
+  }
 }
 
 function placeholder(regexString, replaceFunction, textEditor, textEditorEdit) {
-  let regexExp = new RegExp(regexString, "i");
-  let regexExpG = new RegExp(regexString, "ig");
+  const regexExpG = new RegExp(regexString, "ig");
   const selections = textEditor.selections;
   if (selections.length == 0 || selections.reduce((acc, val) => acc || val.isEmpty), false) { return; }
-  const config = vscode.workspace.getConfiguration("px-to-vw");
   const changesMade = new Map();
   textEditor.edit(builder => {
     let numOcurrences = 0;
     selections.forEach((selection) => {
-      for (var index = selection.start.line; index <= selection.end.line; index++) {
+      for (let index = selection.start.line; index <= selection.end.line; index++) {
         let start = 0, end = textEditor.document.lineAt(index).range.end.character;
         if (index === selection.start.line) {
           let tmpSelection = selection.with({ end: selection.start });
@@ -70,9 +97,9 @@ function placeholder(regexString, replaceFunction, textEditor, textEditorEdit) {
       return;
     }, this);
     if (numOcurrences == 0) {
-      vscode.window.showWarningMessage("There were no values to transform");
+      vscode.window.showWarningMessage(MESSAGES.NO_VALUE_TRANSFORMED);
     } else {
-      vscode.window.showInformationMessage("Transform Success");
+      vscode.window.showInformationMessage(MESSAGES.TRANSFORM_SUCCESS);
     }
   })
     .then(success => {
@@ -96,7 +123,7 @@ function findValueRangeToConvert(selection, regexString, textEditor) {
   const text = textEditor.document.lineAt(line).text;
   const regexExpG = new RegExp(regexString, "ig");
 
-  var result, indices = [];
+  let result;
   while ((result = regexExpG.exec(text))) {
     const resultStart = result.index;
     const resultEnd = result.index + result[0].length;
