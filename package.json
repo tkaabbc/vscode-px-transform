@@ -48,7 +48,7 @@
   "activationEvents": [
     "onCommand:px-transform.multiply"
   ],
-  "main": "./extension.js",
+  "main": "./dist/src/extension.js",
   "icon": "source/logo.png",
   "contributes": {
     "configuration": {
@@ -100,17 +100,18 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "node ./test/runTest.js"
+    "compile": "tsc -p ./",
+    "test": "node ./dist/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.51.0",
     "@types/glob": "^7.1.3",
     "@types/mocha": "^8.0.0",
     "@types/node": "^12.11.7",
+    "@types/vscode": "^1.51.0",
     "eslint": "^7.9.0",
     "glob": "^7.1.6",
     "mocha": "^8.1.3",
-    "typescript": "^4.0.2",
+    "typescript": "^4.9.5",
     "vscode-test": "^1.4.0"
   },
   "repository": "https://github.com/tkaabbc/vscode-px-transform"

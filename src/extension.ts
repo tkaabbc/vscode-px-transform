@@ -1,11 +1,7 @@
-const vscode = require('vscode');
-const { COMMAND_KEYS, CONFIGURATION_PREFIX, NUM_REGEXP, MESSAGES } = require('./constant');
+import * as vscode from "vscode";
+import { COMMAND_KEYS, CONFIGURATION_PREFIX, MESSAGES, NUM_REGEXP } from "./constant";
 
-
-/**
- * @param {vscode.ExtensionContext} context
- */
-function activate(context) {
+export function activate(context: vscode.ExtensionContext) {
   const disposableForTransform = vscode.commands.registerTextEditorCommand(COMMAND_KEYS.TRANSFORM, function (textEditor, textEditorEdit) {
     const {
       multiplier,
@@ -14,6 +10,7 @@ function activate(context) {
       unitPrecision,
     } = getTransformConfiguration();
     const regexStr = `${NUM_REGEXP}${sourceUnit}`;
+    // @ts-ignore
     placeholder(regexStr, (match, value) => `${pxTransform(value, multiplier, unitPrecision)}${targetUnit}`, textEditor, textEditorEdit);
   });
   const disposableForInverseTransform = vscode.commands.registerTextEditorCommand(COMMAND_KEYS.INVERSE_TRANSFORM, function (textEditor, textEditorEdit) {
@@ -24,6 +21,7 @@ function activate(context) {
       unitPrecision,
     } = getTransformConfiguration();
     const regexStr = `${NUM_REGEXP}${targetUnit}`;
+    // @ts-ignore
     placeholder(regexStr, (match, value) => `${pxInverseTransform(value, multiplier, unitPrecision)}${sourceUnit}`, textEditor, textEditorEdit);
   });
 
@@ -52,7 +50,7 @@ const getTransformConfiguration = () => {
     unitPrecision: config.get('unitPrecision'),
   }
 }
-
+// @ts-ignore
 function placeholder(regexString, replaceFunction, textEditor, textEditorEdit) {
   const regexExpG = new RegExp(regexString, "ig");
   const selections = textEditor.selections;
@@ -103,6 +101,7 @@ function placeholder(regexString, replaceFunction, textEditor, textEditorEdit) {
     }
   })
     .then(success => {
+      // @ts-ignore
       textEditor.selections.forEach((selection, index, newSelections) => {
         if (selections[index].start.isEqual(selections[index].end)) {
           const newPosition = selection.end;
@@ -134,10 +133,4 @@ function findValueRangeToConvert(selection, regexString, textEditor) {
   return null;
 }
 
-function deactivate() { }
-
-exports.activate = activate;
-module.exports = {
-  activate,
-  deactivate
-}
+export function deactivate() { }
