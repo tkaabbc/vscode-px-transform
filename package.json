@@ -48,7 +48,7 @@
   "activationEvents": [
     "onCommand:px-transform.multiply"
   ],
-  "main": "./dist/src/extension.js",
+  "main": "./dist/extension.js",
   "icon": "source/logo.png",
   "contributes": {
     "configuration": {
@@ -99,11 +99,13 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "build": "rollup -c",
     "pretest": "npm run lint",
     "compile": "tsc -p ./",
     "test": "node ./dist/test/runTest.js"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.4",
     "@types/glob": "^7.1.3",
     "@types/mocha": "^8.0.0",
     "@types/node": "^12.11.7",
@@ -111,6 +113,7 @@
     "eslint": "^7.9.0",
     "glob": "^7.1.6",
     "mocha": "^8.1.3",
+    "rollup": "^3.29.3",
     "typescript": "^4.9.5",
     "vscode-test": "^1.4.0"
   },
