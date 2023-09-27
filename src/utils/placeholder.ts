@@ -1,9 +1,11 @@
 import * as vscode from 'vscode';
-import { findValueRangeToConvert } from './findValueRangeToConvert';
+
 import { MESSAGES } from '@/constant';
 
+import { findValueRangeToConvert } from './findValueRangeToConvert';
+
 export function placeholder(regPattern, replaceFunction, textEditor) {
-  const selections = textEditor.selections;
+  const { selections } = textEditor;
   if (
     (selections.length === 0 ||
       selections.reduce((acc, val) => acc || val.isEmpty),
@@ -41,8 +43,8 @@ const edit = (builder, selections, textEditor, regPattern, replaceFunction) => {
       index <= selection.end.line;
       index++
     ) {
-      let start = 0,
-        end = textEditor.document.lineAt(index).range.end.character;
+      let start = 0;
+      let end = textEditor.document.lineAt(index).range.end.character;
       if (index === selection.start.line) {
         const tmpSelection = selection.with({ end: selection.start });
         const range = findValueRangeToConvert(
@@ -61,23 +63,21 @@ const edit = (builder, selections, textEditor, regPattern, replaceFunction) => {
         );
         end = range ? range.end.character : selection.end.character;
       }
-      let text = textEditor.document.lineAt(index).text.slice(start, end);
+      const text = textEditor.document.lineAt(index).text.slice(start, end);
       const matches = text.match(regexExpG);
       numOcurrences += matches ? matches.length : 0;
-      if (numOcurrences === 0) {
-        continue;
-      }
-      const newText = text.replace(regexExpG, replaceFunction);
-      const selectionTmp = new vscode.Selection(index, start, index, end);
-      const key = `${index}-${start}-${end}`;
-      if (!changesMade.has(key)) {
-        changesMade.set(key, true);
-        builder.replace(selectionTmp, newText);
+      if (numOcurrences !== 0) {
+        const newText = text.replace(regexExpG, replaceFunction);
+        const selectionTmp = new vscode.Selection(index, start, index, end);
+        const key = `${index}-${start}-${end}`;
+        if (!changesMade.has(key)) {
+          changesMade.set(key, true);
+          builder.replace(selectionTmp, newText);
+        }
       }
     }
-    return;
   });
-  if (numOcurrences == 0) {
+  if (numOcurrences === 0) {
     vscode.window.showWarningMessage(MESSAGES.NO_VALUE_TRANSFORMED);
   } else {
     vscode.window.showInformationMessage(MESSAGES.TRANSFORM_SUCCESS);

@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 
 export function findValueRangeToConvert(selection, regex, textEditor) {
-  const line = selection.start.line;
+  const { line } = selection.start;
   const startChar = selection.start.character;
-  const text = textEditor.document.lineAt(line).text;
+  const { text } = textEditor.document.lineAt(line);
   const regexExpG = new RegExp(regex, 'ig');
 
   let result;
