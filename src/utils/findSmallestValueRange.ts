@@ -1,8 +1,14 @@
 import * as vscode from 'vscode';
 
-export function findValueRangeToConvert(selection, regex, textEditor) {
-  const { line } = selection.start;
-  const startChar = selection.start.character;
+/**
+ * If cursor locates at the inner of a regex matched value,the method can find the smallest Range of the value.
+ * 处理光标处于数值中间的情况
+ * @param selection
+ * @param regex
+ * @param textEditor
+ * @returns
+ */
+export function findSmallestValueRange(line, startChar, regex, textEditor) {
   const { text } = textEditor.document.lineAt(line);
   const regexExpG = new RegExp(regex, 'ig');
 

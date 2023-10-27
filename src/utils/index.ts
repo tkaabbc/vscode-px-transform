@@ -1,12 +1,10 @@
-import { findValueRangeToConvert } from './findValueRangeToConvert';
 import { getTransformConfiguration } from './getTransformConfiguration';
-import { placeholder } from './placeholder';
+import { runConversion } from './runConversion';
 import { divisionTransform, multipilicationTransform } from './transform';
 
 export {
-  findValueRangeToConvert,
   getTransformConfiguration,
-  placeholder,
+  runConversion,
   multipilicationTransform,
   divisionTransform,
 };

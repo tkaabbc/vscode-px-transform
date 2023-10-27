@@ -11,9 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
-    "outDir": "./dist",
+    "strictNullChecks": false,
+    // "sourceMap": true,
+    "outDir": "./out",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

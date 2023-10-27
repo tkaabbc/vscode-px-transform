@@ -48,7 +48,7 @@
   "activationEvents": [
     "onCommand:px-transform.multiply"
   ],
-  "main": "./dist/extension.js",
+  "main": "./out/extension.js",
   "icon": "source/logo.png",
   "contributes": {
     "configuration": {
