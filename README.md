@@ -1,6 +1,8 @@
+<a href="https://www.buymeacoffee.com/tingkeng" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # px-transform
 
-This is an extension for Visual Studio Code that allows you to convert **any** css unit. For example:
+This is an extension for Visual Studio Code that enable you to convert **any** css unit. For example:
 
 - px -> rem
 - px -> rpx
@@ -17,7 +19,7 @@ px -> rem: ![](/source/px-to-rem-demo.gif)
 
 2px -> 4px: ![](/source/px-to-px-demo.gif)
 
-The use of this extension is very simple:
+Using this extension is easy:
 
 1. Install it.
 
@@ -33,7 +35,7 @@ The use of this extension is very simple:
 
 ### 中文介绍：
 
-- 作用一：把任意css单位转换成另一种css单位。你可能有这样的转换需求：
+- 作用一：把任意 css 单位转换成另一种 css 单位。你可能有这样的转换需求：
 
   - px -> rem
   - px -> rpx
@@ -42,7 +44,7 @@ The use of this extension is very simple:
   - ......
   - 等等都可以实现...
 
-- 作用二：对数值做乘法，如要把所有的px都乘2：
+- 作用二：对数值做乘法，如要把所有的 px 都乘 2：
   - 2px -> 4px
 
 ---
