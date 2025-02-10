@@ -1,4 +1,4 @@
-<a href="https://www.buymeacoffee.com/tingkeng" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="display: inline-block; height: 40px !important;width: 167px !important;" ></a> [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/tingkeng) <a href="https://www.buymeacoffee.com/tingkeng" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="display: inline-block; height: 40px ;width: 167px;" ></a> <a href="https://www.buymeacoffee.com/tingkeng" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="display: block; height: 40px ;" ></a>
+[Buy Me a Coffee](https://www.buymeacoffee.com/tingkeng) ☕️
 
 # px-transform
 
