@@ -2,7 +2,7 @@
   "name": "px-transform",
   "displayName": "px-transform",
   "description": "convert one css unit to another, like px rem vw and so on",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "publisher": "Tingkeng",
   "engines": {
     "vscode": "^1.51.0"
